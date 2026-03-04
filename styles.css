@@ -1,0 +1,557 @@
+body {
+  font-family: 'DM Sans', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Sora', sans-serif;
+}
+
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUpScroll {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtleFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(80px) scale(0.95);
+    filter: blur(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes avatarEntrance {
+  from {
+    opacity: 0;
+    transform: translateX(120px) scale(0.95);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes headerEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-hero-entrance {
+  animation: heroEntrance 2.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+.animate-avatar-entrance {
+  animation: avatarEntrance 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+.animate-header-entrance {
+  animation: headerEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(50px) scale(0.98);
+  filter: blur(8px);
+  transition: opacity 2.0s cubic-bezier(0.22, 1, 0.36, 1), transform 2.0s cubic-bezier(0.22, 1, 0.36, 1), filter 2.0s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity, filter;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.animate-float-icon {
+  animation: subtleFloat 3s ease-in-out infinite;
+}
+
+.grid-bg {
+  background-size: 40px 40px;
+}
+
+details>summary {
+  list-style: none;
+}
+
+details>summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] summary~* {
+  animation: sweep .3s ease-in-out;
+}
+
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px)
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+details[open] .rotate-icon {
+  transform: rotate(45deg);
+}
+
+/* Ajuste do Ícone "Olho" de Senha Nativo nos Browsers */
+.dark input[type="password"]::-ms-reveal,
+.dark input[type="password"]::-webkit-textfield-decoration-container {
+  filter: invert(0.8) brightness(150%);
+}
+
+/* =========================================
+           Animações de Alta Performance (CSS-Only)
+           Restrito a opacity e transform
+        ========================================= */
+
+/* Hexágonos base */
+.hex {
+  fill: none;
+  stroke: #2563EB;
+  opacity: 0;
+  animation: hex-enter 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Variações por anel (Escalonamento e Opacidade) */
+.r0 {
+  --target-op: 0.60;
+  stroke-width: 1.5;
+  animation-delay: 0.1s;
+}
+
+.r1 {
+  --target-op: 0.40;
+  stroke-width: 1.5;
+  animation-delay: 0.3s;
+}
+
+.r2 {
+  --target-op: 0.15;
+  stroke-width: 1.2;
+  animation-delay: 0.5s;
+}
+
+.r3 {
+  --target-op: 0.08;
+  stroke-width: 1.0;
+  animation-delay: 0.7s;
+}
+
+/* O hexágono central (Cérebro da Anton.IA) */
+.hex-brain {
+  fill: rgba(37, 99, 235, 0.08);
+}
+
+/* Efeito de Hover (Transição suave da escala gerida pelo JS) */
+.hex use {
+  transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Animação 1: Fade-in escalonado */
+@keyframes hex-enter {
+  0% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0.85);
+  }
+
+  100% {
+    opacity: var(--target-op);
+    transform: translate(var(--tx), var(--ty)) scale(1);
+  }
+}
+
+/* Rede Neural (Fundo) */
+.net-mesh {
+  fill: none;
+  stroke: #2563EB;
+  stroke-width: 1;
+  opacity: 0;
+  animation: fade-in-mesh 1.5s ease-out 0.8s forwards;
+}
+
+@keyframes fade-in-mesh {
+  to {
+    opacity: 0.15;
+  }
+}
+
+/* Animação 2: Pulsos de Rede (Tracers luminosos) */
+.tracer {
+  fill: none;
+  stroke: #2563EB;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+.t1 {
+  stroke-dasharray: 60 400;
+  animation: trace1 3.5s ease-in-out infinite 0.5s;
+}
+
+.t2 {
+  stroke-dasharray: 80 550;
+  animation: trace2 4.5s ease-in-out infinite 1.8s;
+}
+
+.t3 {
+  stroke-dasharray: 50 400;
+  animation: trace1 3.2s ease-in-out infinite 2.5s;
+}
+
+.t4 {
+  stroke-dasharray: 50 400;
+  animation: trace1 3.8s ease-in-out infinite 1.0s;
+}
+
+@keyframes trace1 {
+  0% {
+    stroke-dashoffset: 460;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.6;
+  }
+
+  85% {
+    opacity: 0.6;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes trace2 {
+  0% {
+    stroke-dashoffset: 630;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.6;
+  }
+
+  85% {
+    opacity: 0.6;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+/* Nós (Pontos nos vértices) */
+.node {
+  fill: #2563EB;
+  opacity: 0;
+  animation: node-enter 1s ease-out forwards;
+}
+
+.n-r0 {
+  --node-op: 0.80;
+  animation-delay: 0.2s;
+}
+
+.n-r1 {
+  --node-op: 0.50;
+  animation-delay: 0.4s;
+}
+
+.n-r2 {
+  --node-op: 0.20;
+  animation-delay: 0.6s;
+}
+
+.n-r3 {
+  --node-op: 0.10;
+  animation-delay: 0.8s;
+}
+
+@keyframes node-enter {
+  0% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0);
+  }
+
+  100% {
+    opacity: var(--node-op);
+    transform: translate(var(--tx), var(--ty)) scale(1);
+  }
+}
+
+/* Animação 3: Respiração dos nós selecionados */
+.pulse-node {
+  animation: node-breath 3.5s ease-in-out infinite;
+}
+
+.pn0 {
+  animation-delay: 0s;
+}
+
+.pn1 {
+  animation-delay: 1.2s;
+}
+
+.pn2 {
+  animation-delay: 2.4s;
+}
+
+@keyframes node-breath {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(var(--tx), var(--ty)) scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: translate(var(--tx), var(--ty)) scale(2.2);
+  }
+}
+
+/* Animações 4 e 5: Flutuação Global e Rotação Sutil */
+.honeycomb-rotate {
+  transform-origin: 300px 300px;
+  animation: rotate-mesh 20s ease-in-out infinite;
+}
+
+.honeycomb-float {
+  animation: float-mesh 6s ease-in-out infinite;
+}
+
+@keyframes rotate-mesh {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes float-mesh {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 1200;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseData {
+
+  0%,
+  100% {
+    fill-opacity: 0.6;
+    r: 4;
+    stroke-width: 1;
+  }
+
+  50% {
+    fill-opacity: 1;
+    r: 6;
+    stroke-width: 3;
+    stroke: rgba(255, 255, 255, 0.8);
+  }
+}
+
+@keyframes cometRun {
+  0% {
+    stroke-dashoffset: 1200;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: -120;
+    opacity: 0;
+  }
+}
+
+.anim-fade {
+  opacity: 0;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.delay-3 {
+  animation-delay: 0.6s;
+}
+
+.delay-4 {
+  animation-delay: 0.8s;
+}
+
+.delay-5 {
+  animation-delay: 1.0s;
+}
+
+.chart-path {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: drawLine 2s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s forwards;
+}
+
+.chart-comet {
+  stroke-dasharray: 100 1300;
+  stroke-dashoffset: 1200;
+  animation: cometRun 5s cubic-bezier(0.4, 0, 0.2, 1) 3s infinite;
+  stroke-linecap: round;
+}
+
+.chart-area {
+  opacity: 0;
+  animation: fadeUp 1.5s ease-out 1.5s forwards;
+}
+
+.data-point {
+  opacity: 0;
+  animation: fadeUp 0.4s ease-out forwards, pulseData 2.5s infinite alternate;
+  transform-origin: center;
+}
+
+.dp-1 {
+  animation-delay: 1.4s, 1.4s;
+}
+
+.dp-2 {
+  animation-delay: 1.6s, 1.8s;
+}
+
+.dp-3 {
+  animation-delay: 1.8s, 2.2s;
+}
+
+.dp-4 {
+  animation-delay: 2.0s, 2.6s;
+}
+
+.dp-5 {
+  animation-delay: 2.2s, 3.0s;
+}
+
+.dp-6 {
+  animation-delay: 2.4s, 3.4s;
+}
+
+.dp-7 {
+  animation-delay: 2.6s, 3.8s;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
